@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <title>DASHMIN - Modern Admin & Dashboard Platform</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="DASHMIN, Admin Dashboard, Modern SaaS, Bootstrap 5 Template" name="keywords">
+    <meta content="DASHMIN adalah solusi dashboard admin modern, responsif, dan kaya fitur untuk mengelola data bisnis Anda dengan mudah dan cepat." name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom Landing Page Styles -->
+    <style>
+        :root {
+            --primary: #009CFF;
+            --primary-rgb: 0, 156, 255;
+            --light: #F3F6F9;
+            --dark: #191C24;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #FFFFFF;
+            color: #495057;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Customization */
+        .landing-navbar {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .landing-navbar .nav-link {
+            font-weight: 500;
+            color: var(--dark);
+            padding: 8px 16px !important;
+            transition: color 0.3s ease;
+        }
+
+        .landing-navbar .nav-link:hover,
+        .landing-navbar .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 140px 0 90px;
+            background: radial-gradient(circle at top right, rgba(0, 156, 255, 0.08) 0%, rgba(243, 246, 249, 0.7) 50%, #FFFFFF 100%);
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 16px;
+            background: rgba(0, 156, 255, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero-card-preview {
+            background: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hero-card-preview:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 60px rgba(0, 156, 255, 0.15);
+        }
+
+        /* Feature Cards */
+        .feature-box {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 35px 25px;
+            transition: all 0.35s ease;
+            height: 100%;
+            border: 1px solid transparent;
+        }
+
+        .feature-box:hover {
+            background: #FFFFFF;
+            border-color: rgba(0, 156, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 156, 255, 0.1);
+        }
+
+        .feature-icon-wrapper {
+            width: 65px;
+            height: 65px;
+            border-radius: 14px;
+            background: rgba(0, 156, 255, 0.12);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-box:hover .feature-icon-wrapper {
+            background: var(--primary);
+            color: #FFFFFF;
+            transform: scale(1.08);
+        }
+
+        /* Stats Section */
+        .stat-item {
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        .stat-number {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        /* Showcase Tab */
+        .showcase-tab-btn {
+            border: none;
+            background: var(--light);
+            color: var(--dark);
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin: 0 6px 12px;
+            transition: all 0.3s ease;
+        }
+
+        .showcase-tab-btn.active,
+        .showcase-tab-btn:hover {
+            background: var(--primary);
+            color: #FFFFFF;
+        }
+
+        /* Pricing Cards */
+        .pricing-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            transition: all 0.35s ease;
+            border: 2px solid transparent;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pricing-card.featured {
+            background: #FFFFFF;
+            border-color: var(--primary);
+            box-shadow: 0 20px 45px rgba(0, 156, 255, 0.15);
+            transform: scale(1.03);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.03) translateY(-8px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            right: 25px;
+            background: var(--primary);
+            color: #FFFFFF;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--dark) 0%, #0d2238 50%, var(--primary) 150%);
+            border-radius: 24px;
+            padding: 60px 40px;
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 156, 255, 0.25);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        /* Testimonial Card */
+        .testimonial-item {
+            background: var(--light);
+            border-radius: 18px;
+            padding: 30px;
+            margin: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-item:hover {
+            background: #FFFFFF;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Footer */
+        .landing-footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding-top: 70px;
+            padding-bottom: 25px;
+        }
+
+        .landing-footer h5 {
+            color: #FFFFFF;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .landing-footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .landing-footer a:hover {
+            color: var(--primary);
+        }
+
+        /* Floating elements effect */
+        .floating-badge {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            .hero-section {
+                padding: 110px 0 60px;
+            }
+            .pricing-card.featured {
+                transform: none;
+            }
+            .pricing-card.featured:hover {
+                transform: translateY(-8px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top landing-navbar">
+        <div class="container py-2">
+            <a href="landing.html" class="navbar-brand d-flex align-items-center">
+                <h3 class="text-primary m-0 fw-bold"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#showcase">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Harga</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimoni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="login.html" class="btn btn-outline-primary px-3 py-2 rounded-pill me-2">
+                        <i class="fas fa-sign-in-alt me-1"></i> Sign In
+                    </a>
+                    <a href="register.html" class="btn btn-primary px-4 py-2 rounded-pill shadow-sm">
+                        <i class="fas fa-user-plus me-1"></i> Daftar Gratis
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Hero Section Start -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <div class="hero-badge">
+                        <i class="fas fa-bolt me-2"></i> Modern Admin & Analytics Platform
+                    </div>
+                    <h1 class="hero-title mb-4">
+                        Kelola Bisnis & Data Anda dengan <span>DASHMIN</span>
+                    </h1>
+                    <p class="lead text-muted mb-4">
+                        Dashboard admin yang cepat, responsif, dan elegan dengan desain modern Bootstrap 5. Dilengkapi grafik real-time, manajemen pengguna, dan modul siap pakai untuk mempercepat pertumbuhan aplikasi Anda.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-4">
+                        <a href="register.html" class="btn btn-primary btn-lg px-4 py-3 rounded-pill shadow">
+                            <i class="fas fa-rocket me-2"></i> Mulai Sekarang Gratis
+                        </a>
+                        <a href="index.html" class="btn btn-light btn-lg px-4 py-3 rounded-pill border">
+                            <i class="fas fa-desktop me-2 text-primary"></i> Lihat Live Demo
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-4 pt-3 text-muted small">
+                        <div><i class="fas fa-check-circle text-primary me-1"></i> Tanpa Kartu Kredit</div>
+                        <div><i class="fas fa-check-circle text-primary me-1"></i> Setup Cepat 2 Menit</div>
+                        <div><i class="fas fa-check-circle text-primary me-1"></i> 100% Responsif</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <!-- Floating Badge 1 -->
+                        <div class="floating-badge position-absolute top-0 start-0 translate-middle-y bg-white rounded-3 shadow-lg p-3 d-flex align-items-center gap-3 border" style="z-index: 2; margin-top: 20px;">
+                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 text-primary d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">Pertumbuhan Revenue</small>
+                                <span class="fw-bold text-dark">+48.5% Bulan Ini</span>
+                            </div>
+                        </div>
+
+                        <!-- Main Dashboard Preview Card -->
+                        <div class="hero-card-preview p-3 p-md-4">
+                            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="rounded-circle bg-danger" style="width: 12px; height: 12px;"></span>
+                                    <span class="rounded-circle bg-warning" style="width: 12px; height: 12px;"></span>
+                                    <span class="rounded-circle bg-success" style="width: 12px; height: 12px;"></span>
+                                    <span class="fw-bold ms-2 text-dark small"><i class="fa fa-hashtag text-primary me-1"></i>DASHMIN Console</span>
+                                </div>
+                                <span class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 rounded">Live Data</span>
+                            </div>
+
+                            <!-- Mini Summary Cards -->
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <div class="bg-light rounded p-3">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <small class="text-muted">Hari Ini</small>
+                                            <i class="fa fa-chart-bar text-primary"></i>
+                                        </div>
+                                        <h6 class="mb-0 fw-bold">$1,234</h6>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="bg-light rounded p-3">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <small class="text-muted">Total Sales</small>
+                                            <i class="fa fa-chart-area text-primary"></i>
+                                        </div>
+                                        <h6 class="mb-0 fw-bold">$12,450</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Live Interactive Chart Area -->
+                            <div class="bg-light rounded p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <small class="fw-bold text-dark">Aktivitas Penjualan & Revenue</small>
+                                    <span class="badge bg-primary text-white">2026</span>
+                                </div>
+                                <canvas id="hero-chart" style="max-height: 180px;"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge 2 -->
+                        <div class="position-absolute bottom-0 end-0 translate-middle-y bg-white rounded-3 shadow-lg p-3 d-flex align-items-center gap-3 border" style="z-index: 2; margin-bottom: -15px;">
+                            <div class="rounded-circle bg-success bg-opacity-10 p-3 text-success d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">Sistem Keamanan</small>
+                                <span class="fw-bold text-dark">Terenkripsi 256-Bit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Stats Counter Start -->
+    <div class="container py-4 border-top border-bottom">
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="fw-bold text-dark">SLA Uptime</div>
+                    <small class="text-muted">Performa stabil & andal</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="fw-bold text-dark">Pengguna Aktif</div>
+                    <small class="text-muted">Dipercaya berbagai startup</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="fw-bold text-dark">Komponen UI</div>
+                    <small class="text-muted">Siap pasang & fleksibel</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">4.9/5</div>
+                    <div class="fw-bold text-dark">Kepuasan Klien</div>
+                    <small class="text-muted">Berdasarkan 3,200+ ulasan</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Stats Counter End -->
+
+    <!-- Features Section Start -->
+    <section id="features" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 650px;">
+                <div class="hero-badge">
+                    <i class="fas fa-layer-group me-2"></i> Fitur Unggulan
+                </div>
+                <h2 class="fw-bold text-dark">Semua Kebutuhan Admin dalam Satu Ekosistem</h2>
+                <p class="text-muted">Dibangun dengan arsitektur modern untuk menghadirkan pengalaman manajemen data yang cepat, intuitif, dan nyaman.</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-chart-pie"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">Analitik Real-Time</h4>
+                        <p class="text-muted mb-0">Visualisasikan tren penjualan, traffic pengguna, dan ringkasan keuangan secara langsung dengan integrasi Chart.js interaktif.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-mobile-alt"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">100% Responsif & Mobile First</h4>
+                        <p class="text-muted mb-0">Tata letak adaptif dan fleksibel yang tampil sempurna di layar smartphone, tablet, laptop, maupun monitor desktop.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-user-shield"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">Autentikasi & Keamanan</h4>
+                        <p class="text-muted mb-0">Halaman Login dan Registrasi siap pakai dengan verifikasi formulir modern, enkripsi aman, dan manajemen hak akses.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-th"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">Widget & Tabel Lengkap</h4>
+                        <p class="text-muted mb-0">Kelola ribuan data dengan tabel interaktif, filter pencarian cepat, kalender penjadwalan, dan todo list terintegrasi.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-tachometer-alt"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">Performa Sangat Ringan</h4>
+                        <p class="text-muted mb-0">Kode bersih, rapi, dan teroptimasi tanpa beban library berlebih, memastikan waktu muat halaman secepat kilat.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-headset"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">Dukungan 24/7 & Panduan</h4>
+                        <p class="text-muted mb-0">Dukungan teknis yang ramah dan dokumentasi kode terstruktur yang mempermudah kustomisasi sesuai kebutuhan Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section End -->
+
+    <!-- Showcase / Dashboard Preview Start -->
+    <section id="showcase" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 650px;">
+                <div class="hero-badge">
+                    <i class="fas fa-eye me-2"></i> Showcase Template
+                </div>
+                <h2 class="fw-bold text-dark">Eksplorasi Modul Dashboard DASHMIN</h2>
+                <p class="text-muted">Beralih antar modul untuk melihat betapa mudahnya mengontrol data bisnis Anda.</p>
+            </div>
+
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-5">
+                    <div class="d-flex flex-column gap-3">
+                        <div class="p-4 rounded-3 bg-white shadow-sm border-start border-primary border-4">
+                            <h5 class="fw-bold text-dark mb-2"><i class="fa fa-chart-line text-primary me-2"></i> Ringkasan Penjualan & Finansial</h5>
+                            <p class="text-muted small mb-0">Pantau performa penjualan harian, bulanan, dan tahunan dengan grafik interaktif berwarna khas DASHMIN.</p>
+                        </div>
+                        <div class="p-4 rounded-3 bg-white shadow-sm border-start border-primary border-4">
+                            <h5 class="fw-bold text-dark mb-2"><i class="fa fa-users text-primary me-2"></i> Manajemen Pengguna & Tim</h5>
+                            <p class="text-muted small mb-0">Pengaturan hak akses, verifikasi pengguna, serta aktivitas log terkini secara transparan.</p>
+                        </div>
+                        <div class="p-4 rounded-3 bg-white shadow-sm border-start border-primary border-4">
+                            <h5 class="fw-bold text-dark mb-2"><i class="fa fa-bell text-primary me-2"></i> Notifikasi & Pesan Otomatis</h5>
+                            <p class="text-muted small mb-0">Dapatkan peringatan instan saat ada transaksi baru, tiket bantuan masuk, atau pembaruan sistem.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center text-lg-start">
+                        <a href="index.html" class="btn btn-primary px-4 py-3 rounded-pill">
+                            <i class="fas fa-external-link-alt me-2"></i> Buka Dashboard Lengkap
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="bg-white rounded-3 p-4 shadow-lg border">
+                        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+                            <div>
+                                <h5 class="mb-0 fw-bold text-dark"><i class="fa fa-hashtag text-primary me-2"></i>Preview Transaksi Terkini</h5>
+                                <small class="text-muted">Simulasi data tabel dashboard DASHMIN</small>
+                            </div>
+                            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">Sistem Online</span>
+                        </div>
+
+                        <!-- Sample Table Mockup -->
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr class="text-dark bg-light">
+                                        <th scope="col">Tanggal</th>
+                                        <th scope="col">Invoice</th>
+                                        <th scope="col">Klien</th>
+                                        <th scope="col">Jumlah</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>09 Sep 2026</td>
+                                        <td><span class="fw-bold text-primary">INV-0123</span></td>
+                                        <td>Jhon Doe</td>
+                                        <td class="fw-bold">$123</td>
+                                        <td><span class="badge bg-success">Paid</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>09 Sep 2026</td>
+                                        <td><span class="fw-bold text-primary">INV-0124</span></td>
+                                        <td>Sarah Smith</td>
+                                        <td class="fw-bold">$450</td>
+                                        <td><span class="badge bg-success">Paid</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>08 Sep 2026</td>
+                                        <td><span class="fw-bold text-primary">INV-0125</span></td>
+                                        <td>Alex Wilson</td>
+                                        <td class="fw-bold">$210</td>
+                                        <td><span class="badge bg-warning text-dark">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>08 Sep 2026</td>
+                                        <td><span class="fw-bold text-primary">INV-0126</span></td>
+                                        <td>Jessica Alba</td>
+                                        <td class="fw-bold">$890</td>
+                                        <td><span class="badge bg-success">Paid</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center pt-2">
+                            <small class="text-muted">Menampilkan 4 dari 1,420 transaksi</small>
+                            <a href="table.html" class="btn btn-sm btn-outline-primary rounded-pill">Lihat Semua Tabel &raquo;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Showcase End -->
+
+    <!-- Pricing Section Start -->
+    <section id="pricing" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 650px;">
+                <div class="hero-badge">
+                    <i class="fas fa-tags me-2"></i> Pilihan Paket
+                </div>
+                <h2 class="fw-bold text-dark">Paket Fleksibel Sesuai Kebutuhan</h2>
+                <p class="text-muted">Pilih paket terbaik untuk mempercepat proyek aplikasi web dan sistem admin Anda.</p>
+            </div>
+
+            <div class="row g-4 align-items-stretch">
+                <!-- Starter Plan -->
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <div>
+                            <h4 class="fw-bold text-dark mb-1">Starter</h4>
+                            <p class="text-muted small">Cocok untuk proyek solo & portfolio</p>
+                            <div class="my-4">
+                                <span class="h1 fw-bold text-dark">Gratis</span>
+                                <span class="text-muted">/ selamanya</span>
+                            </div>
+                            <hr class="my-4">
+                            <ul class="list-unstyled d-flex flex-column gap-3 mb-4">
+                                <li><i class="fa fa-check text-primary me-2"></i> Akses Template Dasar</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> Komponen Form & Tabel</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> 3 Jenis Grafik Chart.js</li>
+                                <li class="text-muted"><i class="fa fa-times me-2"></i> Modul Widget Lanjutan</li>
+                                <li class="text-muted"><i class="fa fa-times me-2"></i> Prioritas Bantuan 24/7</li>
+                            </ul>
+                        </div>
+                        <a href="register.html" class="btn btn-outline-primary py-3 w-100 rounded-pill">Mulai Gratis</a>
+                    </div>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="col-lg-4">
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Paling Populer</div>
+                        <div>
+                            <h4 class="fw-bold text-primary mb-1">Professional</h4>
+                            <p class="text-muted small">Solusi ideal untuk startup & bisnis berkembang</p>
+                            <div class="my-4">
+                                <span class="h1 fw-bold text-dark">$29</span>
+                                <span class="text-muted">/ bulan</span>
+                            </div>
+                            <hr class="my-4">
+                            <ul class="list-unstyled d-flex flex-column gap-3 mb-4">
+                                <li><i class="fa fa-check text-primary me-2"></i> Semua Fitur Starter</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> 150+ Komponen UI Lengkap</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> Semua 6 Variasi Chart.js</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> Halaman Autentikasi Lengkap</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> Dukungan Email & Chat Prioritas</li>
+                            </ul>
+                        </div>
+                        <a href="register.html" class="btn btn-primary py-3 w-100 rounded-pill shadow">Pilih Professional</a>
+                    </div>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <div>
+                            <h4 class="fw-bold text-dark mb-1">Enterprise</h4>
+                            <p class="text-muted small">Untuk skala besar & agensi software</p>
+                            <div class="my-4">
+                                <span class="h1 fw-bold text-dark">$89</span>
+                                <span class="text-muted">/ bulan</span>
+                            </div>
+                            <hr class="my-4">
+                            <ul class="list-unstyled d-flex flex-column gap-3 mb-4">
+                                <li><i class="fa fa-check text-primary me-2"></i> Semua Fitur Professional</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> Lisensi Proyek Tanpa Batas</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> Kustomisasi Source Code SASS</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> Dedicated Account Manager</li>
+                                <li><i class="fa fa-check text-primary me-2"></i> Dukungan 24/7 SLA Khusus</li>
+                            </ul>
+                        </div>
+                        <a href="register.html" class="btn btn-outline-primary py-3 w-100 rounded-pill">Hubungi Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing End -->
+
+    <!-- Testimonials Section Start -->
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 650px;">
+                <div class="hero-badge">
+                    <i class="fas fa-comment-dots me-2"></i> Kata Pengguna
+                </div>
+                <h2 class="fw-bold text-dark">Dipercaya oleh Ribuan Pengembang & Pebisnis</h2>
+                <p class="text-muted">Lihat bagaimana DASHMIN membantu mempercepat peluncuran produk dan aplikasi mereka.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-item h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="text-warning mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-muted mb-4">"DASHMIN sangat membantu tim kami membuat portal admin internal hanya dalam waktu 3 hari. Desainnya bersih dan kodenya sangat mudah dipahami."</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid rounded-circle" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;" alt="Client 1">
+                            <div class="ps-3">
+                                <h6 class="fw-bold text-dark mb-0">Rina Wijaya</h6>
+                                <small class="text-muted">Product Manager, TechVibe</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="testimonial-item h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="text-warning mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-muted mb-4">"Warna biru khas #009CFF dan tata letak Bootstrap 5 sangat rapi. Cocok untuk SaaS dashboard kami yang membutuhkan performa tinggi."</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid rounded-circle" src="img/testimonial-2.jpg" style="width: 50px; height: 50px;" alt="Client 2">
+                            <div class="ps-3">
+                                <h6 class="fw-bold text-dark mb-0">Budi Santoso</h6>
+                                <small class="text-muted">Fullstack Developer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="testimonial-item h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="text-warning mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="text-muted mb-4">"Integrasi grafiknya langsung siap pakai dan responsif di smartphone. Template admin terbaik yang pernah saya gunakan tahun ini."</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid rounded-circle" src="img/user.jpg" style="width: 50px; height: 50px;" alt="Client 3">
+                            <div class="ps-3">
+                                <h6 class="fw-bold text-dark mb-0">David Pratama</h6>
+                                <small class="text-muted">CEO, SolusiData</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials End -->
+
+    <!-- FAQ Section Start -->
+    <section id="faq" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 650px;">
+                <div class="hero-badge">
+                    <i class="fas fa-question-circle me-2"></i> FAQ
+                </div>
+                <h2 class="fw-bold text-dark">Pertanyaan yang Sering Diajukan</h2>
+                <p class="text-muted">Temukan jawaban cepat atas pertanyaan umum seputar DASHMIN.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="accordionFaq">
+                        <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    Apakah DASHMIN mudah diintegrasikan dengan backend seperti PHP / Laravel / Node.js?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFaq">
+                                <div class="accordion-body text-muted">
+                                    Sangat mudah! DASHMIN dibuat dengan standar HTML5, CSS3, dan JavaScript murni dengan Bootstrap 5, sehingga Anda dapat dengan leluasa menghubungkannya ke backend Laravel, PHP murni, Express.js, Django, atau API RESTful manapun.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    Bagaimana cara masuk ke dashboard demo?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
+                                <div class="accordion-body text-muted">
+                                    Anda cukup mengklik tombol <strong>Sign In</strong> di pojok kanan atas atau menuju ke halaman <a href="login.html" class="text-primary fw-bold">login.html</a> untuk langsung mencoba antarmuka dashboard admin.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                    Apakah template ini ramah perangkat seluler (Mobile Friendly)?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
+                                <div class="accordion-body text-muted">
+                                    Ya, 100% responsif. Seluruh navigasi, tabel, grafik, dan kartu widget secara otomatis menyesuaikan resolusi layar ponsel Anda.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FAQ End -->
+
+    <!-- CTA Section Start -->
+    <div class="container my-5">
+        <div class="cta-banner">
+            <div class="row align-items-center position-relative" style="z-index: 1;">
+                <div class="col-lg-8 text-center text-lg-start mb-4 mb-lg-0">
+                    <h2 class="fw-bold text-white mb-3">Siap Membangun Aplikasi Impian Anda Hari Ini?</h2>
+                    <p class="lead text-white-50 mb-0">Daftar sekarang dan nikmati kemudahan mengelola sistem dengan antarmuka terbaik dari DASHMIN.</p>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-end">
+                        <a href="register.html" class="btn btn-primary btn-lg px-4 py-3 rounded-pill shadow">
+                            <i class="fas fa-user-plus me-1"></i> Daftar Sekarang
+                        </a>
+                        <a href="login.html" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill">
+                            <i class="fas fa-sign-in-alt me-1"></i> Masuk
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CTA Section End -->
+
+    <!-- Footer Start -->
+    <footer class="landing-footer">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                <div class="col-lg-4 col-md-6">
+                    <a href="landing.html" class="d-flex align-items-center mb-3 text-decoration-none">
+                        <h3 class="text-primary m-0 fw-bold"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    </a>
+                    <p class="text-white-50 mb-4">Template dashboard admin modern berbasis Bootstrap 5 dengan desain yang elegan, performa cepat, dan kustomisasi tanpa batas.</p>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Navigasi</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+                        <li><a href="#home"><i class="fas fa-chevron-right me-2 text-primary small"></i>Home</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right me-2 text-primary small"></i>Fitur</a></li>
+                        <li><a href="#showcase"><i class="fas fa-chevron-right me-2 text-primary small"></i>Dashboard</a></li>
+                        <li><a href="#pricing"><i class="fas fa-chevron-right me-2 text-primary small"></i>Harga</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right me-2 text-primary small"></i>Testimoni</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Halaman Penting</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+                        <li><a href="login.html"><i class="fas fa-chevron-right me-2 text-primary small"></i>Halaman Login</a></li>
+                        <li><a href="register.html"><i class="fas fa-chevron-right me-2 text-primary small"></i>Halaman Register</a></li>
+                        <li><a href="index.html"><i class="fas fa-chevron-right me-2 text-primary small"></i>Dashboard Utama</a></li>
+                        <li><a href="chart.html"><i class="fas fa-chevron-right me-2 text-primary small"></i>Grafik & Chart</a></li>
+                        <li><a href="table.html"><i class="fas fa-chevron-right me-2 text-primary small"></i>Tabel Data</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Hubungi Kami</h5>
+                    <p class="text-white-50 mb-2"><i class="fa fa-map-marker-alt me-2 text-primary"></i>123 Street, Jakarta, Indonesia</p>
+                    <p class="text-white-50 mb-2"><i class="fa fa-phone-alt me-2 text-primary"></i>+62 812 3456 7890</p>
+                    <p class="text-white-50 mb-4"><i class="fa fa-envelope me-2 text-primary"></i>support@dashmin.com</p>
+                </div>
+            </div>
+
+            <div class="border-top border-secondary pt-4 text-center text-white-50 small">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                        &copy; 2026 <a href="landing.html" class="text-primary fw-bold">DASHMIN</a>. All Rights Reserved.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        Dirancang sesuai tema elegan <a href="login.html" class="text-primary">DASHMIN Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Landing Page Javascript -->
+    <script>
+        (function ($) {
+            "use strict";
+
+            // Spinner
+            setTimeout(function () {
+                if ($('#spinner').length > 0) {
+                    $('#spinner').removeClass('show');
+                }
+            }, 100);
+
+            // Back to top button
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            $('.back-to-top').click(function () {
+                $('html, body').animate({scrollTop: 0}, 800, 'easeInOutExpo');
+                return false;
+            });
+
+            // Smooth scrolling for navigation links
+            $('.landing-navbar .nav-link, .landing-footer a[href^="#"]').on('click', function (event) {
+                var target = $(this.getAttribute('href'));
+                if (target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 75
+                    }, 800);
+                    
+                    // Update active nav link
+                    $('.landing-navbar .nav-link').removeClass('active');
+                    $(this).addClass('active');
+
+                    // Close mobile nav if opened
+                    $('.navbar-collapse').collapse('hide');
+                }
+            });
+
+            // Initialize Hero Chart
+            if ($('#hero-chart').length > 0) {
+                var ctx = document.getElementById('hero-chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'],
+                        datasets: [
+                            {
+                                label: 'Penjualan ($)',
+                                data: [35, 45, 60, 50, 75, 80, 110],
+                                backgroundColor: 'rgba(0, 156, 255, 0.25)',
+                                borderColor: '#009CFF',
+                                borderWidth: 2.5,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Revenue ($)',
+                                data: [20, 30, 40, 35, 55, 60, 85],
+                                backgroundColor: 'rgba(25, 28, 36, 0.08)',
+                                borderColor: '#191C24',
+                                borderWidth: 2,
+                                borderDash: [4, 4],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    boxWidth: 12,
+                                    font: {
+                                        size: 11,
+                                        family: 'Heebo'
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        })(jQuery);
+    </script>
+</body>
+
+</html>
