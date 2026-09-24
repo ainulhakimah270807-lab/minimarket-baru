@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 // Rute untuk Halaman Utama / Dashboard POS
 Route::get('/', function () {
- // Mengirim data ke view menggunakan array asosiatif
- return view('dashboard_pos', [
- 'nama_pegawai' => 'Ainul Hakimah',
- 'shift' => 'Pagi (08:00 - 15:00)'
- ]);
+
+return view('welcome', [
+    'title' => 'Selamat Datang di Aplikasi POS Toko Kelontong',
+    'description' => 'Aplikasi ini membantu mengelola transaksi penjualan, stok produk, dan laporan keuangan toko kelontong Anda.'
+]);
 });
 
 // RUTE DASHBOARD & ADMIN DASHMIN (DILINDUNGI AUTH BREEZE)
