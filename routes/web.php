@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Rute untuk Halaman Utama / Dashboard POS
-//ainul jelek 
+//ainul jelek
+// ardhie ganteng sjsjdsjjhshdsf
+
+// sadd
+// as
+// dda
 Route::get('/', function () {
 
 return view('welcome', [
