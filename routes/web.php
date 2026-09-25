@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Rute untuk Halaman Utama / Dashboard POS
+//ainul jelek 
 Route::get('/', function () {
 
 return view('welcome', [
