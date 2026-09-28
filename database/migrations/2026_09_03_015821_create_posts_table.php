@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-
-            // ✅ Tambahkan 2 baris ini
-            $table->string('title');    // Kolom judul (teks pendek)
-            $table->text('content');    // Kolom isi (teks panjang)
-
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('content');
             $table->timestamps();
         });
     }

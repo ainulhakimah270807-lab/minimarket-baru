@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Acara17Controller;
+use App\Http\Controllers\Acara18Controller;
+use App\Http\Controllers\Acara19Controller;
+use App\Http\Controllers\Acara20Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -139,4 +143,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// ==========================================
+// RUTE PRAKTIKUM MINGGU 5 (ACARA 17, 18, 19, 20)
+// ==========================================
+// Acara 17: Query Builder
+Route::get('/acara17', [Acara17Controller::class, 'index'])->name('acara17.index');
+
+// Acara 18: Eloquent ORM (Part 1)
+Route::get('/acara18', [Acara18Controller::class, 'index'])->name('acara18.index');
+
+// Acara 19: Eloquent ORM (Part 2)
+Route::get('/acara19', [Acara19Controller::class, 'index'])->name('acara19.index');
+
+// Acara 20: Form and Validation
+Route::get('/acara20', [Acara20Controller::class, 'index'])->name('acara20.index');
+Route::post('/acara20/controller', [Acara20Controller::class, 'submitController'])->name('acara20.controller');
+Route::post('/acara20/custom-message', [Acara20Controller::class, 'submitCustomMessage'])->name('acara20.custom-message');
+Route::post('/acara20/form-request', [Acara20Controller::class, 'submitFormRequest'])->name('acara20.form-request');
+Route::post('/acara20/custom-rule', [Acara20Controller::class, 'submitCustomRule'])->name('acara20.custom-rule');
+
 require __DIR__.'/auth.php';
+
