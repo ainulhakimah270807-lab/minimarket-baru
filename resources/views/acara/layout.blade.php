@@ -72,23 +72,28 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto gap-1">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('acara17*') ? 'active fw-bold text-white' : '' }}" href="{{ route('acara17.index') }}">
-                            <i class="bi bi-database me-1"></i>Acara 17 (Query Builder)
+                        <a class="nav-link text-white-50" href="{{ url('/admin') }}">
+                            <i class="bi bi-speedometer2 me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('acara18*') ? 'active fw-bold text-white' : '' }}" href="{{ route('acara18.index') }}">
-                            <i class="bi bi-box-seam me-1"></i>Acara 18 (Eloquent 1)
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('acara19*') ? 'active fw-bold text-white' : '' }}" href="{{ route('acara19.index') }}">
-                            <i class="bi bi-diagram-3 me-1"></i>Acara 19 (Eloquent 2)
+                            <i class="bi bi-box-seam me-1"></i>Manajemen Produk
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('acara20*') ? 'active fw-bold text-white' : '' }}" href="{{ route('acara20.index') }}">
-                            <i class="bi bi-check2-circle me-1"></i>Acara 20 (Validation)
+                            <i class="bi bi-plus-circle me-1"></i>Tambah Produk
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('acara17*') ? 'active fw-bold text-white' : '' }}" href="{{ route('acara17.index') }}">
+                            <i class="bi bi-bar-chart me-1"></i>Laporan Stok
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('acara19*') ? 'active fw-bold text-white' : '' }}" href="{{ route('acara19.index') }}">
+                            <i class="bi bi-archive me-1"></i>Arsip & Kategori
                         </a>
                     </li>
                 </ul>

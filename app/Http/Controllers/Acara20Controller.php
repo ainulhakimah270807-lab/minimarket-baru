@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
-use App\Rules\Uppercase;
+use App\Http\Requests\ProductRequest;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class Acara20Controller extends Controller
 {
@@ -13,64 +15,42 @@ class Acara20Controller extends Controller
      */
     public function index()
     {
-        return view('acara.acara20');
+        $categories = Category::orderBy('name')->get();
+        $generatedSku = Product::generateSku($categories->first()?->id);
+
+        return view('acara.acara20-operasional', compact('categories', 'generatedSku'));
     }
 
-    /**
-     * 1 & 2. Validasi Standar di Controller
-     */
-    public function submitController(Request $request)
+    public function generateSku(Request $request)
     {
-        $request->validate([
-            'name' => 'required|min:3|max:50',
-            'email' => 'required|email',
-            'password' => 'required|min:6|confirmed'
+        $categoryId = $request->query('category_id');
+        $sku = Product::generateSku($categoryId ? (int) $categoryId : null);
+
+        return response()->json(['sku' => $sku]);
+    }
+
+    public function store(ProductRequest $request)
+    {
+        Product::create($request->validated());
+
+        return redirect()->route('acara18.index')->with('success', 'Produk baru berhasil ditambahkan.');
+    }
+
+    public function storeCategory(Request $request)
+    {
+        $validated = $request->validate([
+            'category_name' => ['required', 'string', 'max:255', 'unique:categories,name'],
         ]);
+        $baseSlug = Str::slug($validated['category_name']);
+        $slug = $baseSlug;
+        $suffix = 2;
 
-        return redirect()->route('acara20.index')
-            ->with('success', 'Form 1 (Validasi Controller): Data berhasil divalidasi!');
-    }
+        while (Category::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $suffix++;
+        }
 
-    /**
-     * 3. Validasi dengan Pesan Kustom (Custom Validation Message)
-     */
-    public function submitCustomMessage(Request $request)
-    {
-        $messages = [
-            'name.required' => 'Nama harus diisi!',
-            'email.required' => 'Email tidak boleh kosong!',
-            'password.confirmed' => 'Password tidak cocok!'
-        ];
+        Category::create(['name' => $validated['category_name'], 'slug' => $slug]);
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed'
-        ], $messages);
-
-        return redirect()->route('acara20.index')
-            ->with('success', 'Form 2 (Custom Messages): Data berhasil divalidasi!');
-    }
-
-    /**
-     * 4. Validasi Menggunakan Form Request (UserRequest)
-     */
-    public function submitFormRequest(UserRequest $request)
-    {
-        return redirect()->route('acara20.index')
-            ->with('success', 'Form 3 (Form Request): Data berhasil divalidasi!');
-    }
-
-    /**
-     * 5. Validasi Menggunakan Rule Kustom (Uppercase)
-     */
-    public function submitCustomRule(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', new Uppercase]
-        ]);
-
-        return redirect()->route('acara20.index')
-            ->with('success', 'Form 4 (Custom Rule Uppercase): Nama valid dan seluruhnya huruf kapital!');
+        return redirect()->route('acara20.index')->with('success', 'Kategori baru berhasil ditambahkan.');
     }
 }

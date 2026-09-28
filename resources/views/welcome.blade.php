@@ -38,28 +38,6 @@
                     </svg>
                 </div>
 
-                <div class="mt-10 mb-8 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-2 border-indigo-500">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Tugas Workshop Web Framework - Minggu 5</h2>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Akses langsung ke setiap halaman praktikum Acara 17 sampai 20:</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <a href="{{ route('acara17.index') }}" class="p-4 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg border border-indigo-200 hover:bg-indigo-100 transition">
-                            <h3 class="font-bold text-indigo-700 dark:text-indigo-400">Acara 17</h3>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Laravel Query Builder (CRUD, Join, Subquery, Raw)</p>
-                        </a>
-                        <a href="{{ route('acara18.index') }}" class="p-4 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 hover:bg-emerald-100 transition">
-                            <h3 class="font-bold text-emerald-700 dark:text-emerald-400">Acara 18</h3>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Eloquent ORM Part 1 (Active Record CRUD)</p>
-                        </a>
-                        <a href="{{ route('acara19.index') }}" class="p-4 bg-sky-50 dark:bg-sky-950/40 rounded-lg border border-sky-200 hover:bg-sky-100 transition">
-                            <h3 class="font-bold text-sky-700 dark:text-sky-400">Acara 19</h3>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Eloquent Part 2 (Relasi, Mutator, Soft Deletes)</p>
-                        </a>
-                        <a href="{{ route('acara20.index') }}" class="p-4 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200 hover:bg-amber-100 transition">
-                            <h3 class="font-bold text-amber-700 dark:text-amber-400">Acara 20</h3>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Form and Validation (Form Request, Custom Rule)</p>
-                        </a>
-                    </div>
-                </div>
 
                 <div class="mt-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">

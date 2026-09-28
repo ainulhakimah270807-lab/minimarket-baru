@@ -54,7 +54,7 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">{{ Auth::user()->name ?? 'Administrator' }}</h6>
+                        <h6 class="mb-0">{{ Auth::user()->name ?? 'Ainul Hakimah' }}</h6>
                         <span>Admin</span>
                     </div>
                 </div>
@@ -62,20 +62,21 @@
                     <a href="{{ url('/admin') }}" class="nav-item nav-link {{ request()->is('admin') || request()->is('dashboard') ? 'active' : '' }}">
                         <i class="fa fa-tachometer-alt me-2"></i>Dashboard
                     </a>
-                    <a href="{{ url('/posts') }}" class="nav-item nav-link {{ request()->is('posts*') ? 'active' : '' }}">
-                        <i class="fa fa-boxes me-2"></i>Daftar Barang (Posts)
+                    <a href="{{ route('acara18.index') }}" class="nav-item nav-link {{ request()->is('acara18*') ? 'active' : '' }}">
+                        <i class="fa fa-boxes me-2"></i>Manajemen Produk
+                    </a>
+                    <a href="{{ route('acara20.index') }}" class="nav-item nav-link {{ request()->is('acara20*') ? 'active' : '' }}">
+                        <i class="fa fa-plus-circle me-2"></i>Tambah Produk
+                    </a>
+                    <a href="{{ route('acara17.index') }}" class="nav-item nav-link {{ request()->is('acara17*') ? 'active' : '' }}">
+                        <i class="fa fa-chart-bar me-2"></i>Laporan Stok
+                    </a>
+                    <a href="{{ route('acara19.index') }}" class="nav-item nav-link {{ request()->is('acara19*') ? 'active' : '' }}">
+                        <i class="fa fa-archive me-2"></i>Arsip & Kategori
                     </a>
                     <a href="{{ url('/pos-status') }}" class="nav-item nav-link {{ request()->is('pos-status*') ? 'active' : '' }}">
                         <i class="fa fa-store me-2"></i>Status Toko (POS)
                     </a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ url('/admin') }}" class="dropdown-item">Admin Dashboard</a>
-                            <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile Akun</a>
-                            <a href="{{ url('/') }}" class="dropdown-item" target="_blank">Lihat Website</a>
-                        </div>
-                    </div>
                 </div>
             </nav>
         </div>
@@ -115,10 +116,11 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="{{ asset('dashmin/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">{{ Auth::user()->name ?? 'Administrator' }}</span>
+                            <span class="d-none d-lg-inline-flex">{{ Auth::user()->name ?? 'Ainul Hakimah' }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0 shadow-sm">
-                            <a href="{{ route('profile.edit') }}" class="dropdown-item">My Profile</a>
+                            <a href="{{ route('profile.edit') }}" class="dropdown-item"><i class="fa fa-user me-2"></i>My Profile</a>
+                            <a href="{{ url('/') }}" class="dropdown-item" target="_blank"><i class="fa fa-globe me-2"></i>Lihat Website</a>
                             <div class="dropdown-divider"></div>
                             <!-- Logout Form Breeze -->
                             <form method="POST" action="{{ route('logout') }}">

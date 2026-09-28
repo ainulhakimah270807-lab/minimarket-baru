@@ -34,10 +34,10 @@ return view('welcome', [
 ]);
 });
 
-// RUTE DASHBOARD & ADMIN DASHMIN (DILINDUNGI AUTH BREEZE)
+// RUTE DASHBOARD & ADMIN DASHMIN
 Route::get('/dashboard', function () {
     return view('admin');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 // Rute dengan Parameter Wajib (Melihat detail produk berdasarkan ID)
 Route::get('/produk/{id}', function ($id) {
@@ -103,7 +103,7 @@ Route::get('/employee', function () {
 
 Route::get('/admin', function () {
     return view('admin');
-})->middleware(['auth', 'verified'])->name('admin');
+})->name('admin');
 
 // ✅ RUTE MVC ACARA 6 — /posts (GET & DELETE)
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
@@ -111,29 +111,11 @@ Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.de
 
 // === RUTE MONITORING STATUS TOKO KELONTONG ===
 Route::get('/pos-status', function () {
-    $jam = request('jam', 10);
-    $namaKasir = request('nama', 'Pengguna');
-    $pesan = "<h2>=== SISTEM MONITORING TOKO KELONTONG ===</h2>";
-    $pesan .= "<p>Halo <strong>$namaKasir</strong>, Status Toko pada jam $jam:00 WIB adalah:</p>";
+    $jam = (int) request('jam', 10);
+    $namaKasir = request('nama', Auth::user()->name ?? 'Ainul Hakimah');
+    $isBuka = ($jam >= 8 && $jam <= 21);
 
-    if ($jam >= 8 && $jam <= 21) {
-        $pesan .= "<h3 style='color:green;'>✅ BUKA</h3>";
-        $pesan .= "<p>Silakan kasir bersiap di meja transaksi.</p>";
-    } else {
-        $pesan .= "<h3 style='color:red;'>🔴 TUTUP</h3>";
-        $pesan .= "<p>Di luar jam operasional (08:00–21:00).</p>";
-    }
-
-    $pesan .= "
-    <hr>
-    <form method='get'>
-        Nama Kasir: <input type='text' name='nama' placeholder='Masukkan nama' required>
-        Jam: <input type='number' name='jam' min='0' max='23' placeholder='contoh: 10'>
-        <button type='submit'>Cek Status</button>
-    </form>
-    ";
-
-    return $pesan;
+    return view('pos-status', compact('jam', 'namaKasir', 'isBuka'));
 });
 
 // ✅ RUTE PROFIL PENGGUNA
@@ -149,18 +131,26 @@ Route::middleware('auth')->group(function () {
 // Acara 17: Query Builder
 Route::get('/acara17', [Acara17Controller::class, 'index'])->name('acara17.index');
 
-// Acara 18: Eloquent ORM (Part 1)
+// Acara 18: Eloquent CRUD produk
 Route::get('/acara18', [Acara18Controller::class, 'index'])->name('acara18.index');
+Route::put('/acara18/products/{product}', [Acara18Controller::class, 'update'])->name('acara18.products.update');
+Route::delete('/acara18/products/{product}', [Acara18Controller::class, 'destroy'])->name('acara18.products.destroy');
 
-// Acara 19: Eloquent ORM (Part 2)
+// Acara 19: Relasi kategori, scope stok rendah, dan pemulihan produk
 Route::get('/acara19', [Acara19Controller::class, 'index'])->name('acara19.index');
+Route::post('/acara19/products/{id}/restore', [Acara19Controller::class, 'restore'])->name('acara19.products.restore');
 
-// Acara 20: Form and Validation
+// Acara 20: Form dan validasi produk/kategori
 Route::get('/acara20', [Acara20Controller::class, 'index'])->name('acara20.index');
-Route::post('/acara20/controller', [Acara20Controller::class, 'submitController'])->name('acara20.controller');
-Route::post('/acara20/custom-message', [Acara20Controller::class, 'submitCustomMessage'])->name('acara20.custom-message');
-Route::post('/acara20/form-request', [Acara20Controller::class, 'submitFormRequest'])->name('acara20.form-request');
-Route::post('/acara20/custom-rule', [Acara20Controller::class, 'submitCustomRule'])->name('acara20.custom-rule');
+Route::get('/acara20/generate-sku', [Acara20Controller::class, 'generateSku'])->name('acara20.generate-sku');
+Route::post('/acara20/products', [Acara20Controller::class, 'store'])->name('acara20.products.store');
+Route::post('/acara20/categories', [Acara20Controller::class, 'storeCategory'])->name('acara20.categories.store');
+
+// Alias Rute Menu Minimarket
+Route::get('/laporan-stok', [Acara17Controller::class, 'index'])->name('laporan.stok');
+Route::get('/manajemen-produk', [Acara18Controller::class, 'index'])->name('produk.index');
+Route::get('/tambah-produk', [Acara20Controller::class, 'index'])->name('produk.create');
+Route::get('/arsip-kategori', [Acara19Controller::class, 'index'])->name('kategori.index');
 
 require __DIR__.'/auth.php';
 

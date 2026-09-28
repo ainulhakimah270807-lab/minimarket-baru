@@ -5,13 +5,14 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class AcaraPraktikumSeeder extends Seeder
 {
     public function run(): void
     {
         // Nonaktifkan foreign key checks sementara untuk truncate/refresh
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Schema::disableForeignKeyConstraints();
         DB::table('role_user')->truncate();
         DB::table('roles')->truncate();
         DB::table('profiles')->truncate();
@@ -19,7 +20,7 @@ class AcaraPraktikumSeeder extends Seeder
         DB::table('employees')->truncate();
         DB::table('orders')->truncate();
         DB::table('users')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        Schema::enableForeignKeyConstraints();
 
         // 1. Seed Users
         $users = [
@@ -145,3 +146,4 @@ class AcaraPraktikumSeeder extends Seeder
         ]);
     }
 }
+
