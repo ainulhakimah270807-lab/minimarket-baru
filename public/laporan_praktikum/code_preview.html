@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Preview - Light Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 30px;
+        }
+        .code-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            overflow: hidden;
+            max-width: 950px;
+        }
+        .code-header {
+            background: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .code-header .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot.red { background: #ef4444; }
+        .dot.yellow { background: #f59e0b; }
+        .dot.green { background: #10b981; }
+        pre {
+            margin: 0;
+            padding: 16px 20px;
+            background: #ffffff !important;
+            font-size: 12.5px;
+            line-height: 1.55;
+            font-family: "Consolas", "Courier New", monospace;
+        }
+        code {
+            background: #ffffff !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KODE 1: FILE STORAGE CONTROLLER -->
+    <div class="code-container" id="code-storage">
+        <div class="code-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span>app/Http/Controllers/Acara29Controller.php &mdash; Pengelolaan File Storage & Validasi</span>
+        </div>
+        <pre><code class="language-php">&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
+class Acara29Controller extends Controller
+{
+    // Upload Berkas Operasional Minimarket dengan Validasi Ukuran & Format MIME
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'document' => 'required|file|mimes:pdf,docx,jpg,png,csv,xlsx|max:2048',
+            'naming_strategy' => 'required|in:default,original,timestamp,uuid',
+        ]);
+
+        $file = $request->file('document');
+        $extension = $file->getClientOriginalExtension();
+        $strategy = $request->input('naming_strategy');
+
+        switch ($strategy) {
+            case 'original':
+                $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_' . time() . '.' . $extension;
+                break;
+            case 'uuid':
+                $filename = (string) Str::uuid() . '.' . $extension;
+                break;
+            default:
+                $filename = time() . '_' . $file->getClientOriginalName();
+                break;
+        }
+
+        $path = $file->storeAs('documents', $filename, 'public');
+        return redirect()->route('berkas.index')->with('success', "Berkas berhasil diunggah ke storage/app/public/{$path}");
+    }
+
+    // Unduh Berkas Lampiran
+    public function download($filename)
+    {
+        $path = 'documents/' . $filename;
+        if (!Storage::disk('public')->exists($path)) {
+            return redirect()->route('berkas.index')->with('error', 'Berkas tidak ditemukan.');
+        }
+        return Storage::disk('public')->download($path);
+    }
+}</code></pre>
+    </div>
+
+    <!-- KODE 2: CETAK LAPORAN DOMPDF -->
+    <div class="code-container" id="code-dompdf">
+        <div class="code-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span>app/Http/Controllers/Acara30Controller.php &mdash; Ekspor Laporan PDF (DomPDF)</span>
+        </div>
+        <pre><code class="language-php">&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+
+class Acara30Controller extends Controller
+{
+    // Stream Laporan Katalog Produk Minimarket ke Tampilan Browser
+    public function streamProductPdf(Request $request)
+    {
+        $products = DB::table('products')->orderBy('name', 'asc')->get();
+        $store = [
+            'name' => 'MINIMARKET KELONTONG BARU',
+            'address' => 'Jl. Kalimantan No. 37, Jember - Jawa Timur',
+            'phone' => '0812-3456-7890',
+            'printed_at' => now()->format('d F Y H:i:s'),
+            'printed_by' => 'Ainul Hakimah (Admin)'
+        ];
+
+        $pdf = Pdf::loadView('pdf.products', compact('products', 'store'))
+                  ->setPaper('a4', 'portrait')
+                  ->setOptions([
+                      'isRemoteEnabled' => true,
+                      'defaultFont' => 'sans-serif'
+                  ]);
+
+        return $pdf->stream('Laporan_Katalog_Produk_' . date('Ymd_His') . '.pdf');
+    }
+
+    // Download Laporan Valuasi Inventaris & Rekap Stok Kritis
+    public function generateStockPdf(Request $request)
+    {
+        $stocks = DB::table('products')->select('name', 'category', 'stock', 'unit', 'purchase_price', 'selling_price')->get();
+        $totalValuation = $stocks->sum(fn($item) => $item->stock * $item->purchase_price);
+
+        $pdf = Pdf::loadView('pdf.stock', compact('stocks', 'totalValuation'))
+                  ->setPaper('a4', 'landscape');
+
+        return $pdf->download('Laporan_Valuasi_Stok_' . date('Ymd') . '.pdf');
+    }
+}</code></pre>
+    </div>
+
+    <!-- KODE 3: OLOH FOTO & WATERMARK INTERVENTION -->
+    <div class="code-container" id="code-intervention">
+        <div class="code-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span>app/Http/Controllers/Acara31Controller.php &mdash; Manipulasi Gambar & Watermarking</span>
+        </div>
+        <pre><code class="language-php">&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+
+class Acara31Controller extends Controller
+{
+    // Upload & Resizing Gambar Produk Katalog Minimarket
+    public function resize(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:3072',
+            'width' => 'required|integer|min:50|max:2000',
+            'height' => 'required|integer|min:50|max:2000'
+        ]);
+
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($request->file('image')->getPathname());
+        
+        // Resize proposional mempertahankan aspek rasio gambar
+        $image->resize((int)$request->width, (int)$request->height);
+
+        $outputFilename = 'resized_' . time() . '.png';
+        $destinationPath = public_path('uploads/products/' . $outputFilename);
+        $image->save($destinationPath);
+
+        return redirect()->route('olah.foto')->with('success', 'Gambar produk berhasil di-resize: ' . $outputFilename);
+    }
+
+    // Penerapan Watermark Hak Cipta Toko pada Foto Aset
+    public function watermark(Request $request)
+    {
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($request->file('image')->getPathname());
+        $watermarkPath = public_path('images/watermark.png');
+
+        if (file_exists($watermarkPath)) {
+            $image->place($watermarkPath, 'bottom-right', 15, 15, 60);
+        }
+
+        $outputFilename = 'watermarked_' . time() . '.jpg';
+        $image->toJpeg(85)->save(public_path('uploads/products/' . $outputFilename));
+
+        return redirect()->route('olah.foto')->with('success', 'Watermark berhasil disematkan pada gambar.');
+    }
+}</code></pre>
+    </div>
+
+    <!-- KODE 4: LAYANAN EMAIL & QUEUES -->
+    <div class="code-container" id="code-mail">
+        <div class="code-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span>app/Http/Controllers/Acara32Controller.php &mdash; Layanan Email Transaksi & Antrean</span>
+        </div>
+        <pre><code class="language-php">&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InvoiceMailable;
+
+class Acara32Controller extends Controller
+{
+    // Pengiriman Email Invoice Transaksi Penjualan Kasir
+    public function sendInvoice(Request $request)
+    {
+        $request->validate([
+            'customer_email' => 'required|email',
+            'invoice_number' => 'required|string',
+            'total_amount'   => 'required|numeric'
+        ]);
+
+        $orderData = [
+            'invoice' => $request->invoice_number,
+            'customer' => $request->customer_email,
+            'total' => $request->total_amount,
+            'date' => now()->format('d/m/Y H:i')
+        ];
+
+        // Pengiriman email langsung (Synchronous Mail)
+        Mail::to($request->customer_email)->send(new InvoiceMailable($orderData));
+
+        return redirect()->route('layanan.email')->with('success', 'Struk belanja berhasil dikirimkan ke email pelanggan.');
+    }
+
+    // Pengiriman Email Laporan Harian Menggunakan Queue Worker
+    public function queueReport(Request $request)
+    {
+        $recipient = 'manager@minimarket.com';
+        
+        // Memasukkan pengiriman email ke antrean background (database queue)
+        Mail::to($recipient)->queue(new DailyReportMailable());
+
+        return redirect()->route('layanan.email')->with('success', 'Laporan transaksi harian berhasil dijadwalkan dalam antrean.');
+    }
+}</code></pre>
+    </div>
+
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
