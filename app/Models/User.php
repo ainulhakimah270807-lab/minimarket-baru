@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -80,7 +80,10 @@ class User extends Authenticatable
     // a) Mutator: Mengubah Password sebelum disimpan (bcrypt)
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = bcrypt($value);
+        if (!empty($value)) {
+            $info = \Illuminate\Support\Facades\Hash::info($value);
+            $this->attributes['password'] = ($info['algoName'] !== 'unknown') ? $value : bcrypt($value);
+        }
     }
 
     // b) Accessor: Menggabungkan first_name dan last_name

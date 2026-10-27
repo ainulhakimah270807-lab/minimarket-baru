@@ -17,6 +17,9 @@
             <p class="text-muted small mb-0">Sistem monitoring jam operasional dan kesiapan meja kasir transaksi minimarket.</p>
         </div>
         <div>
+            <a href="{{ route('kasir.transaksi') }}" class="btn btn-success shadow-sm me-2">
+                <i class="fa fa-cash-register me-1"></i>Buka Kasir (POS)
+            </a>
             <a href="{{ url('/admin') }}" class="btn btn-outline-primary shadow-sm">
                 <i class="fa fa-tachometer-alt me-1"></i>Ke Dashboard
             </a>

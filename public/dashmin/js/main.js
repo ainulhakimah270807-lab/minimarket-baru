@@ -26,8 +26,8 @@
     });
 
 
-    // Sidebar Toggler
-    $('.sidebar-toggler').click(function () {
+    // Sidebar Toggler & Overlay
+    $('.sidebar-toggler, #sidebarOverlay').click(function () {
         $('.sidebar, .content').toggleClass("open");
         return false;
     });
@@ -69,26 +69,22 @@
         var myChart1 = new Chart(ctx1, {
             type: "bar",
             data: {
-                labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+                labels: ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"],
                 datasets: [{
-                        label: "USA",
+                        label: "Minggu Ini",
                         data: [15, 30, 55, 65, 60, 80, 95],
-                        backgroundColor: "rgba(0, 156, 255, .7)"
+                        backgroundColor: "rgba(79, 70, 229, .8)"
                     },
                     {
-                        label: "UK",
+                        label: "Minggu Lalu",
                         data: [8, 35, 40, 60, 70, 55, 75],
-                        backgroundColor: "rgba(0, 156, 255, .5)"
-                    },
-                    {
-                        label: "AU",
-                        data: [12, 25, 45, 55, 65, 70, 60],
-                        backgroundColor: "rgba(0, 156, 255, .3)"
+                        backgroundColor: "rgba(6, 182, 212, .6)"
                     }
                 ]
             },
             options: {
-                responsive: true
+                responsive: true,
+                maintainAspectRatio: false
             }
         });
     }
@@ -100,23 +96,26 @@
         var myChart2 = new Chart(ctx2, {
             type: "line",
             data: {
-                labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+                labels: ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"],
                 datasets: [{
-                        label: "Salse",
-                        data: [15, 30, 55, 45, 70, 65, 85],
-                        backgroundColor: "rgba(0, 156, 255, .5)",
+                        label: "Omset (Rp)",
+                        data: [1.2, 1.8, 2.5, 2.1, 3.2, 4.0, 3.8],
+                        backgroundColor: "rgba(79, 70, 229, .3)",
+                        borderColor: "#4f46e5",
                         fill: true
                     },
                     {
-                        label: "Revenue",
-                        data: [99, 135, 170, 130, 190, 180, 270],
-                        backgroundColor: "rgba(0, 156, 255, .3)",
+                        label: "Laba (Rp)",
+                        data: [0.4, 0.6, 0.9, 0.7, 1.1, 1.5, 1.3],
+                        backgroundColor: "rgba(16, 185, 129, .2)",
+                        borderColor: "#10b981",
                         fill: true
                     }
                 ]
             },
             options: {
-                responsive: true
+                responsive: true,
+                maintainAspectRatio: false
             }
         });
     }
