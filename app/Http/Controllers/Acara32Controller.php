@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Mail\NotifyUser;
 use App\Mail\WelcomeMail;
 use App\Models\User;

@@ -377,17 +377,34 @@ function selectPayment(button) {
    ============================================ */
 function holdTransaction() {
     if (cart.length === 0) {
-        alert("Tidak ada transaksi untuk ditahan.");
+        Swal.fire({
+            icon: "warning",
+            title: "Perhatian",
+            text: "Tidak ada transaksi untuk ditahan."
+        });
         return;
     }
-    alert("Transaksi berhasil ditahan.");
+
+    Swal.fire({
+        icon: "info",
+        title: "Transaksi Ditahan",
+        text: "Transaksi berhasil disimpan ke daftar pending.",
+        timer: 2000,
+        showConfirmButton: false
+    }).then(() => {
+        resetTransactionState();
+    });
 }
 
 let transactionCounter = 1;
 
 function processPayment() {
     if (cart.length === 0) {
-        alert("Keranjang masih kosong.");
+        Swal.fire({
+            icon: "warning",
+            title: "Keranjang Kosong",
+            text: "Silakan tambahkan barang terlebih dahulu."
+        });
         return;
     }
 
@@ -395,52 +412,72 @@ function processPayment() {
     const payment = parseFloat(document.getElementById("payment")?.value) || 0;
 
     if (payment < total) {
-        alert("Uang pembayaran masih kurang.");
+        Swal.fire({
+            icon: "error",
+            title: "Pembayaran Kurang",
+            text: "Jumlah uang yang dibayarkan masih kurang dari Total Akhir."
+        });
         return;
     }
 
     const change = payment - total;
 
-    alert(
-        "Pembayaran berhasil!\n\n" +
-            "Total : " + formatRupiah(total) + "\n" +
-            "Bayar : " + formatRupiah(payment) + "\n" +
-            "Kembali : " + formatRupiah(change)
-    );
+    // Tampilkan SweetAlert sukses transaksi
+    Swal.fire({
+        icon: "success",
+        title: "Pembayaran Berhasil!",
+        html: `
+            <div style="text-align: left; margin-top: 10px; font-size: 14px;">
+                <b>Total:</b> ${formatRupiah(total)}<br>
+                <b>Bayar:</b> ${formatRupiah(payment)}<br>
+                <b>Kembali:</b> ${formatRupiah(change)}
+            </div>
+        `,
+        confirmButtonText: "OK"
+    }).then(() => {
+        resetTransactionState();
 
-    // Reset transaksi untuk pelanggan berikutnya
-    cart = [];
-    const paymentEl = document.getElementById("payment");
-    const discountPercentEl = document.getElementById("discountPercent");
-    const discountAmountEl = document.getElementById("discountAmount");
-    const taxEl = document.getElementById("tax");
-    const otherFeeEl = document.getElementById("otherFee");
-
-    if (paymentEl) paymentEl.value = "";
-    if (discountPercentEl) discountPercentEl.value = 0;
-    if (discountAmountEl) discountAmountEl.value = 0;
-    if (taxEl) taxEl.value = 0;
-    if (otherFeeEl) otherFeeEl.value = 0;
-
-    // Increment nomor transaksi
-    transactionCounter++;
-    const now = new Date();
-    const dateStr = now.getFullYear().toString() +
-        (now.getMonth() + 1).toString().padStart(2, '0') +
-        now.getDate().toString().padStart(2, '0');
-    const trxEl = document.getElementById("transactionNumber");
-    if (trxEl) {
-        trxEl.innerText = `TRX-${dateStr}-${transactionCounter.toString().padStart(3, '0')}`;
-    }
-
-    renderCart();
+        // Increment nomor transaksi
+        transactionCounter++;
+        const now = new Date();
+        const dateStr = now.getFullYear().toString() +
+            (now.getMonth() + 1).toString().padStart(2, '0') +
+            now.getDate().toString().padStart(2, '0');
+        const trxEl = document.getElementById("transactionNumber");
+        if (trxEl) {
+            trxEl.innerText = `TRX-${dateStr}-${transactionCounter.toString().padStart(3, '0')}`;
+        }
+    });
 }
 
 function cancelTransaction() {
-    if (cart.length > 0 && !confirm("Batalkan transaksi ini?")) {
-        return;
-    }
+    if (cart.length === 0) return;
 
+    Swal.fire({
+        title: "Batalkan Transaksi?",
+        text: "Semua item di keranjang akan dihapus!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Ya, Batalkan!",
+        cancelButtonText: "Tidak"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            resetTransactionState();
+            Swal.fire({
+                icon: "success",
+                title: "Dibatalkan",
+                text: "Transaksi telah dibatalkan.",
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+    });
+}
+
+// Helper untuk mereset state form kasir
+function resetTransactionState() {
     cart = [];
     const paymentEl = document.getElementById("payment");
     const discountPercentEl = document.getElementById("discountPercent");
@@ -456,7 +493,6 @@ function cancelTransaction() {
 
     renderCart();
 }
-
 /* ============================================
    12. DATE & KEYBOARD SHORTCUTS
    ============================================ */
